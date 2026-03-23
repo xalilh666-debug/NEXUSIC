@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نێکسس - سەنتەری ئەپڵیکەیشن و تووڵ</title>
+    <link rel="icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    --bg-color: #030305;
+    --surface-color: rgba(255, 255, 255, 0.02);
+    --surface-hover: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --primary-color: #8b5cf6;
+    --primary-hover: #7c3aed;
+    --secondary-color: rgba(255, 255, 255, 0.05);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --font-family: 'KurdishFont', 'Vazirmatn', 'Outfit', sans-serif;
+}
+
+@font-face {
+    font-family: 'KurdishFont';
+    src: url('font/f.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at 50% -10%, rgba(139, 92, 246, 0.15), transparent 40%),
+                      radial-gradient(ellipse at 80% 60%, rgba(236, 72, 153, 0.05), transparent 30%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(5, 5, 8, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+.logo i {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--text-primary);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.search-box input {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
+    padding-right: 2.5rem;
+    padding-left: 1rem;
+    border-radius: 100px;
+    color: var(--text-primary);
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 250px;
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-primary, .btn-secondary, .btn-download {
+    padding: 0.6rem 1.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 4px 15px rgba(139, 92, 246, 0.25);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: rgba(15, 15, 20, 0.95);
+    border: 1px solid var(--border-color);
+    padding: 3rem;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.form-group select option {
+    background: rgba(15,15,20, 0.95);
+    color: white;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary-color);
+}
+
+
+/* Main Content */
+main {
+    padding: 8rem 4rem 4rem 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Hero Section */
+.hero {
+    height: 550px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(3,3,5, 0.95), rgba(3,3,5, 0.7)), url('https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1200&auto=format&fit=crop') center/cover;
+    display: flex;
+    align-items: center;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+.badge {
+    background: rgba(123, 44, 191, 0.2);
+    border: 1px solid var(--primary-color);
+    color: #e0b3ff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #a78bfa);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Outfit', sans-serif;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Sections */
+.content-section {
+    margin-bottom: 2rem;
+}
+
+/* Tab Styling */
+.tabs-container {
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+}
+.tab-btn {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    backdrop-filter: blur(10px);
+}
+.tab-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+.tab-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 4px 15px rgba(139, 92, 246, 0.25);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.view-all {
+    color: var(--text-secondary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.view-all:hover {
+    color: var(--primary-color);
+}
+
+/* Cards Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 40px rgba(0,0,0,0.3), 0 0 25px rgba(139, 92, 246, 0.15);
+    background: rgba(255,255,255,0.03);
+}
+
+.card-img {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img {
+    transform: scale(1.05);
+}
+
+.card-info {
+    padding: 1.5rem;
+    background: rgba(5,5,8, 0.8);
+    position: relative;
+    z-index: 2;
+}
+
+.card-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.category {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.rating {
+    color: #fbbf24;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-download {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-download:hover {
+    background: var(--primary-color);
+}
+
+.btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Chat Section */
+.chat-container {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    display: flex;
+    gap: 1rem;
+    max-width: 80%;
+}
+
+.message.incoming {
+    align-self: flex-start;
+}
+
+.message.outgoing {
+    align-self: flex-end; /* right aligned visually because RTL */
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-content {
+    background: rgba(5,5,8, 0.8);
+    padding: 1rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    border-top-right-radius: 4px; /* Default for incoming in RTL context */
+}
+
+.message.outgoing .message-content {
+    background: rgba(123, 44, 191, 0.2);
+    border-color: rgba(123, 44, 191, 0.4);
+    border-top-right-radius: 16px;
+    border-top-left-radius: 4px;
+}
+
+.user-name {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.message.outgoing .user-name {
+    color: #c4b5fd;
+}
+
+.time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    display: block;
+    text-align: left;
+}
+
+.chat-input-area {
+    padding: 1rem 1.5rem;
+    background: rgba(5,5,8, 0.9);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.chat-input-area input {
+    flex: 1;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 100px;
+    color: var(--text-primary);
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.chat-input-area input:focus {
+    border-color: var(--primary-color);
+}
+
+.chat-input-area button {
+    padding: 0.8rem 1.2rem;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.online-users {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #10b981;
+    font-size: 0.95rem;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Admin Delete Button */
+.msg-delete-btn { display: none; background: transparent; border: none; color: #ef4444; margin-right: 0.5rem; cursor: pointer; padding: 0.2rem; }
+body.is-admin .msg-delete-btn { display: inline-block; }
+
+@keyframes floatOrb {
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    100% { transform: translateY(-30px) scale(1.05) rotate(5deg); }
+}
+
+/* Custom Scrollbar for chat */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--surface-hover);
+    border-radius: 10px;
+}
+
+/* Roles CSS */
+.role-badge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    vertical-align: middle;
+}
+
+.role-owner {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.role-admin {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.role-staff {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.role-member {
+    background: rgba(156, 163, 175, 0.1);
+    color: #9ca3af;
+    border: 1px solid rgba(156, 163, 175, 0.2);
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 4rem;
+    background: rgba(5,5,8, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.footer-logo i {
+    color: var(--primary-color);
+}
+
+footer p {
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+    .nav-links, .search-box {
+        display: none;
+    }
+    main {
+        padding: 6rem 1rem 2rem 1rem;
+    }
+    .hero {
+        padding: 2rem;
+        height: auto;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" style="height: 38px; border-radius: 8px;"> NEXUS
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active" data-nav="home">سەرەکی</a>
+            <a href="#apps" data-nav="apps">ئەپڵیکەیشنەکان</a>
+            <a href="#tools" data-nav="tools">تووڵەکان</a>
+            <a href="#mods" data-nav="mods">مۆدەکان</a>
+            <a href="#chat" data-nav="chat">چاتی گشتی</a>
+        </div>
+        <div class="nav-actions">
+            <div class="search-box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="گەڕان بۆ ئەپڵیکەیشن، تووڵ...">
+            </div>
+            <button id="loginBtn" class="btn-primary">چوونە ژوورەوە</button>
+        </div>
+    </nav>
+
+    <!-- Auth Modal (Login / Signup) -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" id="closeAuthModal"><i class="fa-solid fa-xmark"></i></button>
+            
+            <!-- Login Form -->
+            <div id="loginFormContainer">
+                <h2>چوونە ژوورەوە</h2>
+                <p>بەخێربێیتەوە بۆ سەنتەری نێکسس!</p>
+                <div id="loginError" style="color: #ef4444; margin-bottom: 1rem; display: none;"></div>
+                <div class="form-group">
+                    <label>ئیمەیڵ</label>
+                    <input type="email" id="loginEmail" placeholder="example@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>وشەی نهێنی (پاسۆرد)</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••">
+                </div>
+                <button id="submitLoginBtn" class="btn-primary btn-block">چوونە ژوورەوە</button>
+                <p style="text-align: center; margin-top: 1rem; cursor: pointer; color: #a78bfa;" onclick="toggleAuth('signup')">هەژمارت نییە؟ لێرە تۆماربە</p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupFormContainer" style="display: none;">
+                <h2>خۆتۆمارکردن</h2>
+                <p>بەخێربێیت بۆ سەنتەری نێکسس، پێکهێنەری هەژمارێکی نوێببە!</p>
+                <div id="signupError" style="color: #ef4444; margin-bottom: 1rem; display: none;"></div>
+                <div class="form-group">
+                    <label>ناوی تەواو</label>
+                    <input type="text" id="signupName" placeholder="ناوەکەت لێرە بنووسە">
+                </div>
+                <div class="form-group">
+                    <label>ئیمەیڵ</label>
+                    <input type="email" id="signupEmail" placeholder="example@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>وشەی نهێنی</label>
+                    <input type="password" id="signupPassword" placeholder="••••••••">
+                </div>
+                <button id="submitSignupBtn" class="btn-primary btn-block">دروستکردنی هەژمار</button>
+                <p style="text-align: center; margin-top: 1rem; cursor: pointer; color: #a78bfa;" onclick="toggleAuth('login')">پێشتر هەژمارت هەیە؟ چوونە ژوورەوە</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Update Modal -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" id="closeProfileModal"><i class="fa-solid fa-xmark"></i></button>
+            <h2>دەستکاری پڕۆفایل</h2>
+            <div id="profileError" style="color: #ef4444; margin-bottom: 1rem; display: none;"></div>
+            <div id="profileSuccess" style="color: #10b981; margin-bottom: 1rem; display: none;">بەسەرکەوتوویی پاشەکەوت کرا!</div>
+            
+            <div style="text-align: center; margin-bottom: 1.5rem; position: relative;">
+                <img id="profileAvatarPreview" src="" alt="Profile" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); cursor: pointer;" onclick="document.getElementById('profAvatarFile').click()">
+                <div id="profRoleDisplay" style="margin-top: 0.5rem; text-align: center;"></div>
+                <div style="margin-top: 0.8rem;">
+                    <button class="btn-secondary" style="padding: 0.4rem 1rem; font-size: 0.8rem;" onclick="document.getElementById('profAvatarFile').click()"><i class="fa-solid fa-camera"></i> گۆڕینی وێنە لە کۆمپیوتەرەکەتەوە</button>
+                </div>
+                <input type="file" id="profAvatarFile" accept="image/*" style="display: none;">
+            </div>
+
+            <div class="form-group">
+                <label>ناو</label>
+                <input type="text" id="profName">
+            </div>
+            <div class="form-group">
+                <label>ئیمەیڵ</label>
+                <input type="email" id="profEmail">
+            </div>
+            <div class="form-group">
+                <label>وشەی نهێنی کۆن</label>
+                <input type="password" id="profOldPwd" placeholder="بۆ گۆڕینی پاسۆرد، کۆنەکە بنووسە...">
+            </div>
+            <div class="form-group">
+                <label>وشەی نهێنی نوێ</label>
+                <input type="password" id="profNewPwd" placeholder="••••••••">
+            </div>
+            <button id="submitProfileBtn" class="btn-primary btn-block">پاشەکەوتکردن</button>
+            <button id="adminPanelBtn" class="btn-secondary btn-block" style="margin-top: 1rem; border-color: #3b82f6; color: #3b82f6; display: none;"><i class="fa-solid fa-users-gear"></i> بەشی بەڕێوەبەر</button>
+            <button id="addAppBtn" class="btn-secondary btn-block" style="margin-top: 1rem; border-color: #10b981; color: #10b981; display: none;"><i class="fa-solid fa-plus"></i> زیادکردنی بەرنامە/تووڵ</button>
+            <button id="logoutBtn" class="btn-secondary btn-block" style="margin-top: 1rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">چوونە دەرەوە</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 550px;">
+            <button class="close-modal" id="closeAdminModal"><i class="fa-solid fa-xmark"></i></button>
+            <h2>بەشی بەڕێوەبەر</h2>
+            <p>دەستکاری ڕۆڵی بەکارهێنەران بکە</p>
+            <div id="adminError" style="color: #ef4444; margin-bottom: 1rem; display: none;"></div>
+            <div id="adminSuccess" style="color: #10b981; margin-bottom: 1rem; display: none;"></div>
+            <div id="adminUsersList" style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem;">
+                <!-- Users get injected here -->
+            </div>
+            
+            <div id="aiAdminSettings" style="display:none;">
+                <hr style="border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+                <h3 style="margin-bottom: 0.5rem; color: #d8b4fe;"><i class="fa-solid fa-brain"></i> ڕێکخستنی ژیری دەستکرد (NEXUS AI)</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">بۆ ئەوەی ڕۆبۆتەکە زۆر زیرەک بێت وەکو جێمینای و چات جی پی تی، پێویستت بە کۆدی نهێنی دەبێت لە کۆمپانیای گووگڵ بەناوی API Key. دەتوانیت بەخۆڕایی لە <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: #60a5fa; text-decoration:underline;">aistudio.google.com</a> دەستی بخەیت.</p>
+                
+                <div class="form-group" style="margin-bottom: 0.5rem;">
+                    <label>گووگڵ جێمینای کۆد (Gemini API Key)</label>
+                    <input type="password" id="geminiApiKeyInput" placeholder="لێرە دایبنێ: AIzaSy...">
+                </div>
+                <button id="saveAiSettingsBtn" class="btn-primary btn-block"><i class="fa-solid fa-save"></i> پاشەکەوتکردنی کۆدەکە</button>
+                <div id="aiSettingsMsg" style="margin-top:0.5rem; font-size:0.85rem; display:none; text-align: center;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div id="addAppModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="close-modal" id="closeAddAppModal"><i class="fa-solid fa-xmark"></i></button>
+            <h2>زیادکردنی نوێ</h2>
+            <div id="addAppError" style="color: #ef4444; margin-bottom: 1rem; display: none;"></div>
+            <div id="addAppSuccess" style="color: #10b981; margin-bottom: 1rem; display: none;"></div>
+            
+            <div class="form-group">
+                <label>جۆر بەرنامەکە</label>
+                <select id="addItemType">
+                    <option value="app">ئەپڵیکەیشن (پڕۆگرام)</option>
+                    <option value="tool">تووڵ (ئامراز)</option>
+                    <option value="mod">مۆد (یاری)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>ناوی بەرنامە</label>
+                <input type="text" id="addItemTitle" placeholder="ناوی ئەپڵیکەیشن/تووڵ">
+            </div>
+            <div class="form-group">
+                <label>پۆلێن (Category)</label>
+                <select id="addItemCategory">
+                    <option value="" disabled selected>هەڵبژێرە (بۆ نموونە: کۆدینگ)</option>
+                    <option value="steamtool">Steam Tool - پێداویستی ستیم</option>
+                    <option value="vscode">VS Code Tool - تووڵی کۆد ئێدیتەر</option>
+                    <option value="coding">Coding - پڕۆگرامسازی</option>
+                    <option value="clouding">Clouding - هەوری نێت</option>
+                    <option value="ai">AI - ژیری دەستکرد</option>
+                    <option value="graphic">Graphic Design - کاری دیزاین</option>
+                    <option value="video">Video Editing - کاری مۆنتاژ</option>
+                    <option value="audio">Audio Editing - کاری دەنگ</option>
+                    <option value="3d">3D Design - دیزاینی سێ دووری</option>
+                    <option value="other">Other - تێکەڵ</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>بەستەری وێنە، یان وێنەیەک لە کۆمپیوتەرەکەتەوە باربکە</label>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <button id="selectImageFileBtn" class="btn-secondary" style="font-size: 0.9rem; padding: 0.4rem 1rem;"><i class="fa-solid fa-image"></i> هەڵبژاردنی وێنە</button>
+                    <span id="selectedImageName" style="align-self: center; font-size: 0.85rem; color: var(--text-secondary);">هیچ وێنەیەک هەڵنەبژێردراوە</span>
+                </div>
+                <input type="file" id="addImageFile" accept="image/*" style="display: none;">
+                <input type="text" id="addItemImage" placeholder="یان لینکی وێنەیەک لە ئینتەرنێتەوە لێرە دابنێ...">
+            </div>
+            <div class="form-group">
+                <label>ئەستێرە (ڕەیتینگ)</label>
+                <input type="text" id="addItemRating" placeholder="بۆ نموونە: 4.8" value="4.8">
+            </div>
+            <div class="form-group">
+                <label>فایلی بەرنامە یان بەستەر (هەڵبژاردەیی)</label>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <button id="selectItemFileBtn" class="btn-secondary" style="font-size: 0.9rem; padding: 0.4rem 1rem;"><i class="fa-solid fa-file-arrow-up"></i> هەڵبژاردنی فایل</button>
+                    <span id="selectedFileName" style="align-self: center; font-size: 0.85rem; color: var(--text-secondary);">هیچ فایلێک هەڵنەبژێردراوە</span>
+                </div>
+                <input type="file" id="addItemFile" style="display: none;">
+                <input type="text" id="addItemDownload" placeholder="یان لینکی دەرەکی بنووسە بێرەدا (وەک: مێگا)">
+            </div>
+            <button id="submitAddItemBtn" class="btn-primary btn-block">بڵاوکردنەوەی بەرنامە</button>
+        </div>
+    </div>
+
+    <main>
+        <div id="heroGroup" style="display: block; opacity: 1; transition: opacity 0.4s ease;">
+        
+        <!-- Welcome Hero -->
+        <section class="welcome-hero" style="position: relative; text-align: center; padding: 6rem 1rem 8rem 1rem; overflow: hidden; margin-top: -85px;">
+            <!-- Glowing Orbs -->
+            <div style="position: absolute; top: 10%; left: 15%; width: 400px; height: 400px; background: rgba(139, 92, 246, 0.25); border-radius: 50%; filter: blur(120px); z-index: 0; animation: floatOrb 10s infinite ease-in-out alternate;"></div>
+            <div style="position: absolute; bottom: 0; right: 10%; width: 500px; height: 500px; background: rgba(16, 185, 129, 0.15); border-radius: 50%; filter: blur(150px); z-index: 0; animation: floatOrb 12s infinite ease-in-out alternate-reverse;"></div>
+
+            <!-- Background Grid Lines -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.05; background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, transparent 100%);"></div>
+
+            <div style="position: relative; z-index: 1; max-width: 800px; margin: 0 auto;">
+                <span style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.2rem; background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 100px; color: #d8b4fe; font-size: 0.9rem; margin-bottom: 2rem; font-weight: 500; backdrop-filter: blur(10px);">
+                    <span style="display: inline-block; width: 8px; height: 8px; background: #a78bfa; border-radius: 50%; box-shadow: 0 0 10px #a78bfa;"></span>
+                    نوێترین ڤێرژنی سەنتەر بەردەستە
+                </span>
+                <h1 style="font-size: 4rem; font-family: 'Outfit', sans-serif; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2; letter-spacing: -1px; background: linear-gradient(to right, #ffffff, #c4b5fd); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">سەنتەری ئەپڵیکەیشن و <br/>تەکنەلۆژیای نێکسس</h1>
+                <p style="font-size: 1.15rem; color: #9ca3af; line-height: 1.7; margin-bottom: 2.5rem; max-width: 650px; margin-left: auto; margin-right: auto;">لە یەک شوێندا دەستت دەگات بە باشترین مۆدەکان (Mods)، تووڵەکان (Tools) و ئەپە باوەکان (Apps) بە خێراییەکی لەبننەهاتوو و بە شێوەیەکی پارێزراو بۆ هەمیشە.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn-primary" onclick="document.querySelector('.nav-links a[data-nav=apps]').click()" style="padding: 1rem 2rem; font-size: 1.05rem; border-radius: 14px; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);"><i class="fa-solid fa-layer-group"></i> بینینی ئەپەکان</button>
+                    <button class="btn-secondary" onclick="document.querySelector('.nav-links a[data-nav=chat]').click()" style="padding: 1rem 2rem; font-size: 1.05rem; border-radius: 14px; border-color: rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); backdrop-filter: blur(10px);"><i class="fa-solid fa-comments"></i> چاتی گشتی</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats & Search -->
+        <div style="max-width: 1200px; margin: -5rem auto 4rem auto; position: relative; z-index: 10; padding: 0 1rem;">
+            <!-- Search -->
+            <div style="background: rgba(15,15,20, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; padding: 0.5rem 1.5rem; display: flex; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); backdrop-filter: blur(10px); margin-bottom: 2rem;">
+                <i class="fa-solid fa-search" style="color: var(--primary-color); font-size: 1.2rem; margin-left: 1rem;"></i>
+                <input type="text" id="globalSearch" placeholder="بەدوای بەرنامە یان تووڵێکدا دەگەڕێیت؟ ناوەکەی لێرە بنووسە..." autocomplete="off" style="background: transparent; border: none; outline: none; color: white; width: 100%; font-family: inherit; font-size: 1.05rem; padding: 0.5rem 0;">
+            </div>
+
+            <!-- Stats -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 24px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; color: #a855f7; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 800;"><span class="counter" id="downloadsCounter" data-target="0">0</span>+</div>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem;">داگرتن کراوە بەسەرکەوتوویی</div>
+                </div>
+                <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.05); border-left: 1px solid rgba(255,255,255,0.05);">
+                    <div style="font-size: 2.5rem; color: #10b981; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 800;"><span class="counter" id="appsCounter" data-target="0">0</span>+</div>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem;">بەرنامە و تووڵ بەردەستە</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; color: #3b82f6; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 800;"><span class="counter" id="usersCounter" data-target="0">0</span>+</div>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem;">بەکارهێنەرانی سەنتەر</div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- Apps Section -->
+        <section id="apps" class="content-section tab-section" style="display: block; opacity: 1; transition: opacity 0.4s ease;">
+            <div class="section-header">
+                <h2>ئەپڵیکەیشنە باوەکان</h2>
+                <a href="#" class="view-all">هەمووی ببینە <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+            <div class="grid" id="appsGrid">
+                <!-- Apps will be dynamically loaded here from server -->
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="content-section tab-section" style="display: none; opacity: 0; transition: opacity 0.4s ease;">
+            <div class="section-header">
+                <h2>باشترین تووڵەکان</h2>
+                <a href="#" class="view-all">هەمووی ببینە <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+            <div class="grid" id="toolsGrid">
+                <!-- Tools will be dynamically loaded here from server -->
+            </div>
+        </section>
+
+        <!-- Mods Section -->
+        <section id="mods" class="content-section tab-section" style="display: none; opacity: 0; transition: opacity 0.4s ease;">
+            <div class="section-header">
+                <h2>باشترین مۆدەکان</h2>
+                <a href="#" class="view-all">هەمووی ببینە <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+            <div class="grid" id="modsGrid">
+                <!-- Mods will be dynamically loaded here from server -->
+            </div>
+        </section>
+
+        <!-- General Chat Section -->
+        <section id="chat" class="content-section tab-section" style="display: none; opacity: 0; transition: opacity 0.4s ease;">
+            <div class="section-header">
+                <h2>چاتی گشتی</h2>
+                <span class="online-users"><i class="fa-solid fa-users"></i> ... لەهێڵن</span>
+            </div>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="نامەیەک بنووسە بێرەدا..." autocomplete="off">
+                    <button id="sendBtn" class="btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating AI Button -->
+    <button id="aiFloatingBtn" style="position: fixed; bottom: 30px; left: 30px; background: linear-gradient(135deg, #7b2cbf, #ff007f); color: white; border: none; border-radius: 50%; width: 65px; height: 65px; font-size: 1.8rem; cursor: pointer; box-shadow: 0 10px 25px rgba(123, 44, 191, 0.5); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: transform 0.3s ease;">
+        <i class="fa-solid fa-robot"></i>
+    </button>
+
+    <!-- AI Chat Window -->
+    <div id="aiChatWindow" style="position: fixed; bottom: 110px; left: 30px; width: 350px; height: 500px; background: rgba(15, 15, 20, 0.95); border: 1px solid var(--border-color); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); z-index: 9998; display: none; flex-direction: column; overflow: hidden; backdrop-filter: blur(10px); opacity: 0; transform: translateY(20px); transition: all 0.3s ease;">
+        <div style="background: linear-gradient(135deg, #7b2cbf, #ff007f); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; color: white;">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <div style="background: white; color: #7b2cbf; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem;">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <div style="font-weight: 800; font-family: 'Outfit', sans-serif;">NEXUS AI</div>
+                    <div style="font-size: 0.75rem; opacity: 0.9;">لەسەر هێڵە</div>
+                </div>
+            </div>
+            <button id="closeAiChat" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div id="aiChatMessages" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; gap: 0.8rem; align-self: flex-start; max-width: 85%;">
+                <div style="background: rgba(123, 44, 191, 0.2); border: 1px solid rgba(123, 44, 191, 0.4); padding: 0.8rem 1rem; border-radius: 16px; border-top-right-radius: 4px; font-size: 0.9rem; line-height: 1.5;">
+                    سڵاو! من ژیری دەستکردی نێکسسـم. چۆن دەتوانم یارمەتیت بدەم بە دۆزینەوەی بەرنامە و تووڵەکان؟
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 1rem; border-top: 1px solid var(--border-color); background: rgba(5,5,8,0.9); display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="aiChatInput" placeholder="لێرە پرسیارەکەت بنووسە..." autocomplete="off" style="flex: 1; background: var(--surface-color); border: 1px solid var(--border-color); padding: 0.8rem 1rem; border-radius: 100px; color: white; outline: none; font-family: inherit; font-size: 0.9rem;">
+            <button id="sendAiBtn" style="background: linear-gradient(135deg, #7b2cbf, #ff007f); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.2s;"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.png" alt="Nexus Clouding Logo" style="height: 38px; border-radius: 8px;"> NEXUS
+            </div>
+            <p>&copy; 2026 سەنتەری ئەپڵیکەیشن و تووڵەکان نێکسس. هەموو مافێک پارێزراوە.</p>
+        </div>
+    </footer>
+
+    <!-- Socket.IO library to connect to the backend -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Download buttons simulate
+    document.querySelectorAll('.btn-download, .hero-buttons .btn-primary').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            if (this.id === 'sendBtn' || this.id === 'loginBtn' || this.id === 'submitLoginBtn' || this.id === 'submitSignupBtn' || this.id === 'submitProfileBtn' || this.id === 'logoutBtn') return; 
+            e.preventDefault();
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> لە دابەزاندندایە...';
+            this.style.pointerEvents = 'none';
+            this.style.background = '#9d4edd';
+            setTimeout(() => {
+                this.innerHTML = '<i class="fa-solid fa-check"></i> دابەزی';
+                this.style.background = '#10b981';
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.pointerEvents = 'auto';
+                    this.style.background = '';
+                }, 3000);
+            }, 1500);
+        });
+    });
+
+    // --- Auth and Profile Logic ---
+    let currentUser = null;
+    let selectedAvatarBase64 = null;
+
+    const storedUser = localStorage.getItem('nexus_user_data');
+    if (storedUser) {
+        try {
+            currentUser = JSON.parse(storedUser);
+            updateUIAuth(currentUser);
+        } catch(e) {}
+    }
+
+    const authModal = document.getElementById('authModal');
+    const profileModal = document.getElementById('profileModal');
+    const loginBtnHero = document.getElementById('loginBtn');
+    
+    function toggleAuth(type) {
+        document.getElementById('loginError').style.display = 'none';
+        document.getElementById('signupError').style.display = 'none';
+        if (type === 'login') {
+            document.getElementById('loginFormContainer').style.display = 'block';
+            document.getElementById('signupFormContainer').style.display = 'none';
+        } else {
+            document.getElementById('loginFormContainer').style.display = 'none';
+            document.getElementById('signupFormContainer').style.display = 'block';
+        }
+    }
+    window.toggleAuth = toggleAuth;
+
+    function getRoleBadge(roleStr) {
+        if (!roleStr) return '<span class="role-badge role-member">ئەندام</span>';
+        switch(roleStr.toLowerCase()) {
+            case 'owner': return '<span class="role-badge role-owner"><i class="fa-solid fa-crown"></i> خاوەن</span>';
+            case 'admin': return '<span class="role-badge role-admin"><i class="fa-solid fa-shield"></i> ئەدمین</span>';
+            case 'staff': return '<span class="role-badge role-staff"><i class="fa-solid fa-wrench"></i> ستاف</span>';
+            case 'member': return '<span class="role-badge role-member">ئەندام</span>';
+            default: return '<span class="role-badge role-member">ئەندام</span>';
+        }
+    }
+
+    function updateUIAuth(user) {
+        if (user) {
+            loginBtnHero.innerHTML = `<img src="${user.avatar}" style="width:24px; height:24px; border-radius:50%; vertical-align:middle;"> ${user.name}`;
+            loginBtnHero.classList.remove('btn-primary');
+            loginBtnHero.classList.add('btn-secondary');
+            if(user.role === 'owner' || user.role === 'admin') {
+                document.body.classList.add('is-admin');
+            } else {
+                document.body.classList.remove('is-admin');
+            }
+        } else {
+            loginBtnHero.innerHTML = 'چوونە ژوورەوە';
+            loginBtnHero.classList.remove('btn-secondary');
+            loginBtnHero.classList.add('btn-primary');
+            document.body.classList.remove('is-admin');
+        }
+    }
+
+    // Avatar File Picker logic
+    document.getElementById('profAvatarFile')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                selectedAvatarBase64 = evt.target.result;
+                document.getElementById('profileAvatarPreview').src = selectedAvatarBase64;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    if (loginBtnHero) {
+        loginBtnHero.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!currentUser) {
+                toggleAuth('login');
+                authModal.classList.add('active');
+            } else {
+                // Open Profile Editor
+                document.getElementById('profName').value = currentUser.name;
+                document.getElementById('profEmail').value = currentUser.email;
+                document.getElementById('profileAvatarPreview').src = currentUser.avatar;
+                
+                // Show badge
+                document.getElementById('profRoleDisplay').innerHTML = getRoleBadge(currentUser.role);
+                
+                const adminBtn = document.getElementById('adminPanelBtn');
+                const addAppBtn = document.getElementById('addAppBtn');
+                if (adminBtn) {
+                    if (currentUser.role === 'owner' || currentUser.role === 'admin') {
+                        adminBtn.style.display = 'block';
+                        if(addAppBtn) addAppBtn.style.display = 'block';
+                    } else {
+                        adminBtn.style.display = 'none';
+                        if(addAppBtn) addAppBtn.style.display = 'none';
+                    }
+                }
+
+                document.getElementById('profileSuccess').style.display = 'none';
+                document.getElementById('profileError').style.display = 'none';
+                document.getElementById('profOldPwd').value = '';
+                document.getElementById('profNewPwd').value = '';
+                selectedAvatarBase64 = null;
+
+                profileModal.classList.add('active');
+            }
+        });
+    }
+
+    document.getElementById('closeAuthModal')?.addEventListener('click', () => authModal.classList.remove('active'));
+    document.getElementById('closeProfileModal')?.addEventListener('click', () => profileModal.classList.remove('active'));
+    
+    // API Call API
+    async function apiCall(endpoint, data) {
+        try {
+            const res = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            return await res.json();
+        } catch(err) {
+            return { error: "هەڵەیەک ڕوویدا لە سێرڤەر" };
+        }
+    }
+
+    document.getElementById('submitSignupBtn')?.addEventListener('click', async () => {
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim();
+        const pwd = document.getElementById('signupPassword').value;
+        const errObj = document.getElementById('signupError');
+        
+        if (!name || !email || !pwd) {
+            errObj.innerText = "تکایە هەموو بۆشاییەکان پڕبکەرەوە";
+            errObj.style.display = 'block';
+            return;
+        }
+        
+        const data = await apiCall('/api/signup', { name, email, password: pwd });
+        if (data.error) {
+            errObj.innerText = data.error;
+            errObj.style.display = 'block';
+        } else {
+            currentUser = data.user;
+            localStorage.setItem('nexus_user_data', JSON.stringify(currentUser));
+            updateUIAuth(currentUser);
+            authModal.classList.remove('active');
+        }
+    });
+
+    document.getElementById('submitLoginBtn')?.addEventListener('click', async () => {
+        const email = document.getElementById('loginEmail').value.trim();
+        const pwd = document.getElementById('loginPassword').value;
+        const errObj = document.getElementById('loginError');
+        if (!email || !pwd) {
+            errObj.innerText = "تکایە هەموو بۆشاییەکان پڕبکەرەوە";
+            errObj.style.display = 'block';
+            return;
+        }
+        
+        const data = await apiCall('/api/login', { email, password: pwd });
+        if (data.error) {
+            errObj.innerText = data.error;
+            errObj.style.display = 'block';
+        } else {
+            currentUser = data.user;
+            localStorage.setItem('nexus_user_data', JSON.stringify(currentUser));
+            updateUIAuth(currentUser);
+            authModal.classList.remove('active');
+        }
+    });
+
+    document.getElementById('submitProfileBtn')?.addEventListener('click', async () => {
+        const errObj = document.getElementById('profileError');
+        const sucObj = document.getElementById('profileSuccess');
+        sucObj.style.display = 'none';
+        errObj.style.display = 'none';
+
+        const avatarToSave = selectedAvatarBase64 ? selectedAvatarBase64 : currentUser.avatar;
+
+        const data = await apiCall('/api/update-profile', {
+            token: currentUser.token,
+            name: document.getElementById('profName').value.trim(),
+            email: document.getElementById('profEmail').value.trim(),
+            avatar: avatarToSave,
+            currentPassword: document.getElementById('profOldPwd').value,
+            newPassword: document.getElementById('profNewPwd').value
+        });
+        
+        if (data.error) {
+            errObj.innerText = data.error;
+            errObj.style.display = 'block';
+        } else {
+            currentUser = data.user;
+            localStorage.setItem('nexus_user_data', JSON.stringify(currentUser));
+            updateUIAuth(currentUser);
+            document.getElementById('profileAvatarPreview').src = currentUser.avatar;
+            sucObj.style.display = 'block';
+            document.getElementById('profOldPwd').value = '';
+            document.getElementById('profNewPwd').value = '';
+            selectedAvatarBase64 = null;
+        }
+    });
+
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        if(confirm("دڵنیایت دەتەوێت لە هەژمارەکەت بچیتە دەرەوە؟")) {
+            localStorage.removeItem('nexus_user_data');
+            currentUser = null;
+            updateUIAuth(null);
+            profileModal.classList.remove('active');
+        }
+    });
+
+    // Admin Panel Logic
+    const adminModal = document.getElementById('adminModal');
+    
+    document.getElementById('closeAdminModal')?.addEventListener('click', () => adminModal.classList.remove('active'));
+
+    document.getElementById('adminPanelBtn')?.addEventListener('click', async () => {
+        profileModal.classList.remove('active');
+        adminModal.classList.add('active');
+        loadUsersForAdmin();
+        
+        // AI Settings
+        if (currentUser.role === 'owner') {
+            document.getElementById('aiAdminSettings').style.display = 'block';
+            try {
+                const sRes = await fetch('/api/settings?token=' + currentUser.token);
+                const sData = await sRes.json();
+                if (sData.geminiApiKey) {
+                    document.getElementById('geminiApiKeyInput').value = sData.geminiApiKey;
+                }
+            } catch(e) {}
+        } else {
+            const aiConf = document.getElementById('aiAdminSettings');
+            if (aiConf) aiConf.style.display = 'none';
+        }
+    });
+
+    document.getElementById('saveAiSettingsBtn')?.addEventListener('click', async () => {
+        const key = document.getElementById('geminiApiKeyInput').value.trim();
+        const msg = document.getElementById('aiSettingsMsg');
+        
+        // Basic loading
+        msg.style.display = 'block';
+        msg.style.color = '#a855f7';
+        msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> خەریکی پاشەکەوتکردنە...';
+        
+        try {
+            const res = await apiCall('/api/settings', { token: currentUser.token, geminiApiKey: key });
+            if (res.error) {
+                msg.style.color = '#ef4444';
+                msg.innerText = res.error;
+            } else {
+                msg.style.color = '#10b981';
+                msg.innerText = 'کۆدی زیرەکی دەستکرد بەسەرکەوتوویی پاشەکەوت کرا! پەیجەکە ڕیفرێش بکە.';
+                setTimeout(() => msg.style.display = 'none', 5000);
+            }
+        } catch(e){}
+    });
+
+    async function loadUsersForAdmin() {
+        const listContainer = document.getElementById('adminUsersList');
+        const errObj = document.getElementById('adminError');
+        const sucObj = document.getElementById('adminSuccess');
+        errObj.style.display = 'none';
+        sucObj.style.display = 'none';
+        listContainer.innerHTML = '<div style="text-align: center;"><i class="fa-solid fa-spinner fa-spin"></i> دابەزاندنی یوزەرەکان...</div>';
+
+        try {
+            const res = await fetch(`/api/users?token=${currentUser.token}`);
+            const users = await res.json();
+            
+            if (users.error) {
+                errObj.innerText = users.error;
+                errObj.style.display = 'block';
+                listContainer.innerHTML = '';
+                return;
+            }
+
+            listContainer.innerHTML = '';
+            users.forEach(u => {
+                const userDiv = document.createElement('div');
+                userDiv.style.background = 'var(--surface-color)';
+                userDiv.style.padding = '1rem';
+                userDiv.style.borderRadius = '8px';
+                userDiv.style.display = 'flex';
+                userDiv.style.justifyContent = 'space-between';
+                userDiv.style.alignItems = 'center';
+
+                const disabled = (currentUser.role === 'admin' && u.role === 'owner') || currentUser.id === u.id ? 'disabled' : '';
+
+                userDiv.innerHTML = `
+                    <div style="display:flex; align-items:center; gap: 0.8rem;">
+                        <img src="${u.avatar}" style="width: 38px; height: 38px; border-radius: 50%;">
+                        <div>
+                            <div style="font-size: 0.95rem; font-weight: 600; font-family: 'Outfit', sans-serif;">${u.name} ${getRoleBadge(u.role)}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top:0.2rem;">${u.email}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <select class="role-select" data-uid="${u.id}" ${disabled} style="background: rgba(15,15,20,0.9); color: white; border: 1px solid var(--border-color); padding: 0.4rem; border-radius: 6px; outline: none; cursor: pointer; font-family: inherit;">
+                            <option value="owner" ${u.role === 'owner' ? 'selected' : ''}>خاوەن</option>
+                            <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>ئەدمین</option>
+                            <option value="staff" ${u.role === 'staff' ? 'selected' : ''}>ستاف</option>
+                            <option value="member" ${u.role === 'member' || !u.role ? 'selected' : ''}>ئەندام</option>
+                        </select>
+                    </div>
+                `;
+                listContainer.appendChild(userDiv);
+            });
+
+            // Add listener to selects
+            document.querySelectorAll('.role-select').forEach(select => {
+                select.addEventListener('change', async function() {
+                    const uid = parseInt(this.getAttribute('data-uid'));
+                    const newRole = this.value;
+                    const result = await apiCall('/api/update-role', {
+                        token: currentUser.token,
+                        targetUserId: uid,
+                        newRole: newRole
+                    });
+
+                    if (result.error) {
+                        errObj.innerText = result.error;
+                        errObj.style.display = 'block';
+                        sucObj.style.display = 'none';
+                        loadUsersForAdmin(); // reload to reset options
+                    } else {
+                        sucObj.innerText = 'ڕۆڵی بەکارهێنەر بە سەرکەوتوویی گۆڕدرا!';
+                        sucObj.style.display = 'block';
+                        errObj.style.display = 'none';
+                        // Re-fetch to update badges inside list
+                        setTimeout(() => loadUsersForAdmin(), 1000);
+                    }
+                });
+            });
+
+        } catch (err) {
+            errObj.innerText = 'هەڵەیەک ڕوویدا لە پەیوەندی بە سێرڤەرەوە.';
+            errObj.style.display = 'block';
+            listContainer.innerHTML = '';
+        }
+    }
+
+    // App & Tool Add Logic
+    const addAppModal = document.getElementById('addAppModal');
+    document.getElementById('closeAddAppModal')?.addEventListener('click', () => addAppModal.classList.remove('active'));
+
+    let allItemsGlobal = { apps: [], tools: [] };
+    let currentEditItemId = null;
+
+    document.getElementById('addAppBtn')?.addEventListener('click', () => {
+        currentEditItemId = null;
+        profileModal.classList.remove('active');
+        addAppModal.classList.add('active');
+        document.getElementById('addAppSuccess').style.display = 'none';
+        document.getElementById('addAppError').style.display = 'none';
+        document.getElementById('submitAddItemBtn').innerText = 'بڵاوکردنەوەی بەرنامە';
+        
+        document.getElementById('addItemTitle').value = '';
+        document.getElementById('addItemCategory').value = '';
+        document.getElementById('addItemImage').value = '';
+        document.getElementById('addImageFile').value = '';
+        document.getElementById('selectedImageName').innerText = 'هیچ وێنەیەک هەڵنەبژێردراوە';
+        document.getElementById('addItemDownload').value = '';
+        document.getElementById('addItemFile').value = '';
+        document.getElementById('selectedFileName').innerText = 'هیچ فایلێک هەڵنەبژێردراوە';
+    });
+
+    document.getElementById('selectItemFileBtn')?.addEventListener('click', () => {
+        document.getElementById('addItemFile').click();
+    });
+    
+    document.getElementById('selectImageFileBtn')?.addEventListener('click', () => {
+        document.getElementById('addImageFile').click();
+    });
+    
+    document.getElementById('addImageFile')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        document.getElementById('selectedImageName').innerText = file ? file.name : 'هیچ وێنەیەک هەڵنەبژێردراوە';
+    });
+    
+    document.getElementById('addItemFile')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        document.getElementById('selectedFileName').innerText = file ? file.name : 'هیچ فایلێک هەڵنەبژێردراوە';
+    });
+
+    document.getElementById('submitAddItemBtn')?.addEventListener('click', async () => {
+        const type = document.getElementById('addItemType').value;
+        const title = document.getElementById('addItemTitle').value.trim();
+        const category = document.getElementById('addItemCategory').value.trim();
+        const imageUrl = document.getElementById('addItemImage').value.trim();
+        const rating = document.getElementById('addItemRating').value.trim();
+        const downloadUrl = document.getElementById('addItemDownload').value.trim();
+        const fileInput = document.getElementById('addItemFile');
+        const imageInput = document.getElementById('addImageFile');
+        const errObj = document.getElementById('addAppError');
+        const sucObj = document.getElementById('addAppSuccess');
+
+        if (!title || !category) {
+            errObj.innerText = "ناوی بەرنامە و پۆلێن داواکراوە.";
+            errObj.style.display = 'block';
+            sucObj.style.display = 'none';
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('token', currentUser.token);
+        formData.append('type', type);
+        formData.append('title', title);
+        formData.append('category', category);
+        formData.append('imageUrl', imageUrl);
+        formData.append('rating', rating);
+        formData.append('downloadUrl', downloadUrl);
+        if (currentEditItemId) {
+            formData.append('id', currentEditItemId);
+        }
+        if (fileInput.files.length > 0) {
+            formData.append('itemFile', fileInput.files[0]);
+        }
+        if (imageInput.files.length > 0) {
+            formData.append('imageFile', imageInput.files[0]);
+        }
+        
+        errObj.style.display = 'none';
+        sucObj.style.display = 'block';
+        sucObj.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> لە بارکردندایە... تکایە چاوەڕێبە';
+
+        try {
+            const targetEndpoint = currentEditItemId ? '/api/edit-item' : '/api/add-item';
+            const response = await fetch(targetEndpoint, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            
+            if (data.error) {
+                errObj.innerText = data.error;
+                errObj.style.display = 'block';
+                sucObj.style.display = 'none';
+            } else {
+                errObj.style.display = 'none';
+                sucObj.innerText = currentEditItemId ? "سەرکەوتووبوو! گۆڕانکارییەکان هەڵگیران." : "سەرکەوتووبوو! بەرنامەکەت زیادکرا.";
+                sucObj.style.display = 'block';
+                
+                // Update globally clean
+                await loadItems();
+            }
+        } catch (err) {
+            errObj.innerText = "کێشەیەک ڕوویدا لە کاتی ناردندا.";
+            errObj.style.display = 'block';
+            sucObj.style.display = 'none';
+        }
+    });
+
+    async function loadItems() {
+        try {
+            const res = await fetch('/api/items');
+            const data = await res.json();
+            allItemsGlobal = data;
+            
+            document.getElementById('appsGrid').innerHTML = '';
+            document.getElementById('toolsGrid').innerHTML = '';
+            if(document.getElementById('modsGrid')) document.getElementById('modsGrid').innerHTML = '';
+            
+            if (data.apps) data.apps.forEach(item => renderItemToGrid(item, 'app'));
+            if (data.tools) data.tools.forEach(item => renderItemToGrid(item, 'tool'));
+            if (data.mods) data.mods.forEach(item => renderItemToGrid(item, 'mod'));
+        } catch(e){}
+    }
+
+    document.getElementById('globalSearch')?.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        const filterCat = (arr, t) => {
+            const grid = document.getElementById(t === 'app' ? 'appsGrid' : (t === 'tool' ? 'toolsGrid' : 'modsGrid'));
+            if(!grid) return;
+            grid.innerHTML = '';
+            const res = term ? arr.filter(i => i.title.toLowerCase().includes(term) || i.category.toLowerCase().includes(term)) : arr;
+            res.forEach(item => renderItemToGrid(item, t));
+        };
+        if (allItemsGlobal.apps) filterCat(allItemsGlobal.apps, 'app');
+        if (allItemsGlobal.tools) filterCat(allItemsGlobal.tools, 'tool');
+        if (allItemsGlobal.mods) filterCat(allItemsGlobal.mods, 'mod');
+    });
+    
+    function renderItemToGrid(item, type) {
+        let gridId = 'appsGrid';
+        if (type === 'tool') gridId = 'toolsGrid';
+        if (type === 'mod') gridId = 'modsGrid';
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        
+        const existingCard = document.getElementById(`item-card-${item.id}`);
+        if(existingCard) existingCard.remove();
+        
+        const isAdmin = currentUser && (currentUser.role === 'owner' || currentUser.role === 'admin');
+        const adminControls = isAdmin ? `
+            <div style="position: absolute; top: 10px; right: 10px; z-index: 10; display:flex; gap:0.5rem;">
+                <button class="btn-edit-item" data-id="${item.id}" data-type="${type}" style="background: rgba(251, 191, 36, 0.8); border:1px solid #fbbf24; border-radius:4px; padding:0.4rem 0.6rem; color:black; cursor:pointer; font-size: 0.8rem;"><i class="fa-solid fa-pen"></i></button>
+                <button class="btn-delete-item" data-id="${item.id}" data-type="${type}" style="background: rgba(239, 68, 68, 0.8); border:1px solid #ef4444; border-radius:4px; padding:0.4rem 0.6rem; color:white; cursor:pointer; font-size: 0.8rem;"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        ` : '';
+
+        const html = `
+            <div class="card" id="item-card-${item.id}" style="position:relative;">
+                ${adminControls}
+                <div class="card-img" style="background-image: url('${item.imageUrl}');"></div>
+                <div class="card-info">
+                    <h3>${item.title}</h3>
+                    <p class="category">${item.category}</p>
+                    <div class="card-footer">
+                        ${type === 'app' ? `<span class="rating"><i class="fa-solid fa-star"></i> ${item.rating}</span><a href="${item.downloadUrl || '#'}" target="_blank" class="btn-download" style="text-decoration:none;"><i class="fa-solid fa-download"></i> وەرگرتن</a>` : `<a href="${item.downloadUrl || '#'}" target="_blank" class="btn-download btn-block" style="text-decoration:none; justify-content:center;"><i class="fa-solid fa-download"></i> دابەزاندن</a>` }
+                    </div>
+                </div>
+            </div>
+        `;
+        grid.insertAdjacentHTML('afterbegin', html);
+    }
+    
+    // Delegation for edit, delete, and download logic
+    document.addEventListener('click', async (e) => {
+        const downloadBtn = e.target.closest('.btn-download');
+        if (downloadBtn) {
+            const cardInfo = downloadBtn.closest('.card-info');
+            const title = cardInfo ? cardInfo.querySelector('h3').innerText : 'بەرنامەیەک';
+            fetch('/api/track-action', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ action: 'download', detail: title, token: currentUser ? currentUser.token : null })
+            });
+        }
+
+        const delBtn = e.target.closest('.btn-delete-item');
+        if (delBtn) {
+            const id = delBtn.getAttribute('data-id');
+            const type = delBtn.getAttribute('data-type');
+            if(confirm('دڵنیایت دەتەوێت ئەم بەرنامەیە بسڕیتەوە؟')) {
+                const res = await apiCall('/api/delete-item', { token: currentUser.token, id, type });
+                if(!res.error) {
+                    const card = document.getElementById(`item-card-${id}`);
+                    if(card) card.remove();
+                    // remove from global
+                    let arr = allItemsGlobal.apps;
+                    if(type === 'tool') arr = allItemsGlobal.tools;
+                    if(type === 'mod') arr = allItemsGlobal.mods;
+                    const idx = arr.findIndex(i => i.id == id);
+                    if(idx !== -1) arr.splice(idx, 1);
+                } else alert(res.error);
+            }
+        }
+        
+        const editBtn = e.target.closest('.btn-edit-item');
+        if (editBtn) {
+            const id = editBtn.getAttribute('data-id');
+            const type = editBtn.getAttribute('data-type');
+            let arr = allItemsGlobal.apps;
+            if(type === 'tool') arr = allItemsGlobal.tools;
+            if(type === 'mod') arr = allItemsGlobal.mods;
+            const item = arr.find(i => i.id == id);
+            
+            if(item) {
+                currentEditItemId = id;
+                document.getElementById('addItemType').value = type;
+                document.getElementById('addItemTitle').value = item.title;
+                document.getElementById('addItemCategory').value = item.category;
+                document.getElementById('addItemImage').value = item.imageUrl;
+                document.getElementById('addImageFile').value = '';
+                document.getElementById('selectedImageName').innerText = 'هیچ وێنەیەک هەڵنەبژێردراوە';
+                document.getElementById('addItemRating').value = item.rating || "4.8";
+                document.getElementById('addItemDownload').value = item.downloadUrl || "";
+                
+                document.getElementById('submitAddItemBtn').innerText = 'هەڵگرتنی گۆڕانکارییەکان';
+                document.getElementById('addAppSuccess').style.display = 'none';
+                document.getElementById('addAppError').style.display = 'none';
+                
+                addAppModal.classList.add('active');
+            }
+        }
+    });
+    
+    loadItems();
+
+    // Chat Socket functionality
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+
+    const socket = typeof io !== 'undefined' ? io() : null;
+    
+    if (socket) {
+        socket.on('userCount', (count) => {
+            const userCountSpan = document.querySelector('.online-users');
+            if (userCountSpan) {
+                userCountSpan.innerHTML = `<i class="fa-solid fa-users"></i> ${count} لەهێڵن (ڕاستەقینە)`;
+            }
+        });
+
+        socket.on('chatMessage', (msgHtml) => {
+            chatMessages.insertAdjacentHTML('beforeend', msgHtml);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            saveMessages();
+        });
+    }
+
+    function loadMessages() {
+        let savedMessages = localStorage.getItem('nexus_chat');
+        if (savedMessages && !savedMessages.includes('msg-delete-btn')) {
+            localStorage.removeItem('nexus_chat');
+            savedMessages = null;
+        }
+
+        if (savedMessages) {
+            chatMessages.innerHTML = savedMessages;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        } else {
+            chatMessages.innerHTML = `<div style="text-align: center; color: var(--text-secondary); margin-top: 2rem; font-size: 0.9rem;">بەخێربێیت بۆ چاتی گشتی...</div>`;
+        }
+    }
+
+    function saveMessages() {
+        localStorage.setItem('nexus_chat', chatMessages.innerHTML);
+    }
+
+    function sendMessage() {
+        const text = chatInput.value.trim();
+        if (text) {
+            
+            const badge = currentUser ? getRoleBadge(currentUser.role) : getRoleBadge('member');
+            const msgId = 'msg-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6);
+            const delBtn = `<button class="msg-delete-btn" onclick="requestDelete('${msgId}')"><i class="fa-solid fa-trash"></i></button>`;
+
+            // My message styling
+            const myMsgHtml = `
+                <div class="message outgoing" id="${msgId}">
+                    <div class="message-content">
+                        <span class="user-name">خۆت (You) ${badge} ${delBtn}</span>
+                        <p>${text}</p>
+                        <span class="time">ئێستا</span>
+                    </div>
+                </div>
+            `;
+            // Other people's styling
+            const otherUserAvatar = currentUser ? currentUser.avatar : 'https://i.pravatar.cc/150?u=guest';
+            const otherUserName = currentUser ? currentUser.name : 'میوان';
+            
+            const otherMsgHtml = `
+                <div class="message incoming" id="${msgId}">
+                    <img src="${otherUserAvatar}" alt="User" class="avatar">
+                    <div class="message-content" style="border-top-right-radius: 4px; border-top-left-radius: 16px;">
+                        <span class="user-name">${otherUserName} ${badge} ${delBtn}</span>
+                        <p>${text}</p>
+                        <span class="time">ئێستا</span>
+                    </div>
+                </div>
+            `;
+
+            chatMessages.insertAdjacentHTML('beforeend', myMsgHtml);
+            chatInput.value = '';
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            saveMessages();
+
+            if (socket) {
+                socket.emit('chatMessage', otherMsgHtml);
+            }
+        }
+    }
+
+    if(sendBtn && chatInput && chatMessages) {
+        loadMessages();
+        
+        sendBtn.addEventListener('click', sendMessage);
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+    // AI Chat UI Logic
+    const aiFloatingBtn = document.getElementById('aiFloatingBtn');
+    const aiChatWindow = document.getElementById('aiChatWindow');
+    const closeAiChat = document.getElementById('closeAiChat');
+    const aiChatInput = document.getElementById('aiChatInput');
+    const sendAiBtn = document.getElementById('sendAiBtn');
+    const aiChatMessages = document.getElementById('aiChatMessages');
+
+    let aiChatOpen = false;
+
+    aiFloatingBtn?.addEventListener('click', () => {
+        aiChatOpen = !aiChatOpen;
+        if (aiChatOpen) {
+            aiChatWindow.style.display = 'flex';
+            setTimeout(() => {
+                aiChatWindow.style.opacity = '1';
+                aiChatWindow.style.transform = 'translateY(0)';
+            }, 10);
+            aiFloatingBtn.style.transform = 'scale(0.8)';
+            aiFloatingBtn.innerHTML = '<i class="fa-solid fa-comment-dots"></i>';
+        } else {
+            closeAiChatWindow();
+            aiFloatingBtn.innerHTML = '<i class="fa-solid fa-robot"></i>';
+        }
+    });
+
+    closeAiChat?.addEventListener('click', () => {
+        closeAiChatWindow();
+        aiFloatingBtn.innerHTML = '<i class="fa-solid fa-robot"></i>';
+    });
+
+    function closeAiChatWindow() {
+        aiChatWindow.style.opacity = '0';
+        aiChatWindow.style.transform = 'translateY(20px)';
+        aiFloatingBtn.style.transform = 'scale(1)';
+        setTimeout(() => {
+            aiChatWindow.style.display = 'none';
+        }, 300);
+        aiChatOpen = false;
+    }
+
+    async function sendAiMessage() {
+        const text = aiChatInput.value.trim();
+        if (!text) return;
+
+        // User message UI
+        const userHtml = `
+            <div style="align-self: flex-end; max-width: 85%;">
+                <div style="background: var(--surface-hover); border: 1px solid var(--border-color); padding: 0.8rem 1rem; border-radius: 16px; border-top-left-radius: 4px; font-size: 0.9rem; line-height: 1.5; color: white;">
+                    ${text}
+                </div>
+            </div>
+        `;
+        aiChatMessages.insertAdjacentHTML('beforeend', userHtml);
+        aiChatInput.value = '';
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+        // Typing UI
+        const typingId = 'typing-' + Date.now();
+        const typingHtml = `
+            <div id="${typingId}" style="display: flex; gap: 0.8rem; align-self: flex-start; max-width: 85%;">
+                <div style="background: rgba(123, 44, 191, 0.2); border: 1px solid rgba(123, 44, 191, 0.4); padding: 0.8rem 1rem; border-radius: 16px; border-top-right-radius: 4px; font-size: 0.9rem; color: #d8b4fe;">
+                    <i class="fa-solid fa-ellipsis fa-fade"></i> خەریکی بیرکردنەوەیە...
+                </div>
+            </div>
+        `;
+        aiChatMessages.insertAdjacentHTML('beforeend', typingHtml);
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+        try {
+            const res = await fetch('/api/ai-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+            });
+            const data = await res.json();
+            
+            document.getElementById(typingId)?.remove();
+
+            const aiHtml = `
+                <div style="display: flex; gap: 0.8rem; align-self: flex-start; max-width: 85%;">
+                    <div style="background: rgba(123, 44, 191, 0.2); border: 1px solid rgba(123, 44, 191, 0.4); padding: 0.8rem 1rem; border-radius: 16px; border-top-right-radius: 4px; font-size: 0.9rem; line-height: 1.6; color: white;">
+                        ${data.reply}
+                    </div>
+                </div>
+            `;
+            aiChatMessages.insertAdjacentHTML('beforeend', aiHtml);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+        } catch (e) {
+            document.getElementById(typingId)?.remove();
+            const errHtml = `
+                <div style="display: flex; gap: 0.8rem; align-self: flex-start; max-width: 85%;">
+                    <div style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.8rem 1rem; border-radius: 16px; border-top-right-radius: 4px; font-size: 0.9rem; color: #fca5a5;">
+                        ببورە کێشەیەک لە هێڵەکەدا هەیە. دووبارە پەیامەکەت بنێرە.
+                    </div>
+                </div>
+            `;
+            aiChatMessages.insertAdjacentHTML('beforeend', errHtml);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+    }
+
+    sendAiBtn?.addEventListener('click', sendAiMessage);
+    aiChatInput?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendAiMessage();
+    });
+
+    // Extras: Live Search, Counters, Toasts
+    document.getElementById('globalSearch')?.addEventListener('input', function(e) {
+        const text = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.card').forEach(card => {
+            const titleElement = card.querySelector('h3');
+            if(!titleElement) return; // Skip if not a valid item card
+            
+            const title = titleElement.innerText.toLowerCase();
+            const category = card.querySelector('.category')?.innerText.toLowerCase() || '';
+            if (title.includes(text) || category.includes(text)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                const counter = entry.target;
+                const target = +counter.getAttribute('data-target');
+                const inc = target / 50;
+                let count = 0;
+                const updateCount = () => {
+                    count += inc;
+                    if(count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+                observer.unobserve(counter);
+            }
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(c => observer.observe(c));
+
+    const toastContainer = document.createElement('div');
+    toastContainer.style.cssText = 'position: fixed; bottom: 20px; left: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none;';
+    document.body.appendChild(toastContainer);
+
+    function showRealToast(title, subtitle, avatarUrl) {
+        const toast = document.createElement('div');
+        toast.style.cssText = 'background: rgba(15,15,20, 0.9); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.3); backdrop-filter: blur(5px); transform: translateY(120%); opacity: 0; transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); color: white; width: max-content;';
+        
+        toast.innerHTML = `
+            <img src="${avatarUrl}" style="width: 40px; height: 40px; border-radius: 50%;">
+            <div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">${title}</div>
+                <div style="font-size: 0.95rem; font-weight: bold; color: var(--primary-color);">${subtitle}</div>
+            </div>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        requestAnimationFrame(() => {
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+        });
+        
+        setTimeout(() => {
+            toast.style.transform = 'translateY(120%)';
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 500);
+        }, 5000);
+    }
+
+    socket.on('liveAction', (data) => {
+        showRealToast(`ئێستا ${data.username}`, `${data.action} (${data.detail || ''})`, data.avatar);
+    });
+
+    window.requestDelete = function(msgId) {
+        if (currentUser && (currentUser.role === 'owner' || currentUser.role === 'admin')) {
+            if(confirm("دڵنیایت دەتەوێت ئەم نامەیە بسڕیتەوە بۆ هەمووان؟")) {
+                socket.emit('deleteMessage', { msgId, token: currentUser.token });
+            }
+        }
+    };
+    
+    socket.on('messageDeleted', (msgId) => {
+        const msgEl = document.getElementById(msgId);
+        if(msgEl) {
+            msgEl.style.transition = 'opacity 0.3s ease';
+            msgEl.style.opacity = '0';
+            setTimeout(() => {
+                msgEl.remove();
+                localStorage.setItem('nexus_chat', document.getElementById('chatMessages').innerHTML);
+            }, 300);
+        }
+    });
+
+    // On Load: Fetch Real Stats
+    async function initStats() {
+        try {
+            const res = await fetch('/api/stats');
+            const data = await res.json();
+            document.getElementById('downloadsCounter').setAttribute('data-target', data.downloads || 0);
+            document.getElementById('appsCounter').setAttribute('data-target', data.itemsCount || 0);
+            document.getElementById('usersCounter').setAttribute('data-target', data.usersCount || 0);
+            
+            // Re-trigger observer for counters with new real targets
+            document.querySelectorAll('.counter').forEach(c => c.innerText = "0");
+            document.querySelectorAll('.counter').forEach(c => observer.observe(c));
+        } catch(e) {}
+    }
+    initStats();
+
+    // Navbar Tabs Logic
+    document.querySelectorAll('.nav-links a[data-nav]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.nav-links a[data-nav]').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            const target = link.getAttribute('data-nav');
+            
+            const heroGroup = document.getElementById('heroGroup');
+            const appsSec = document.getElementById('apps');
+            const toolsSec = document.getElementById('tools');
+            const modsSec = document.getElementById('mods');
+            const chatSec = document.getElementById('chat');
+
+            [heroGroup, appsSec, toolsSec, modsSec, chatSec].forEach(el => {
+                if(el) { el.style.display = 'none'; el.style.opacity = '0'; }
+            });
+
+            if (target === 'home') {
+                if(heroGroup) heroGroup.style.display = 'block';
+                if(appsSec) appsSec.style.display = 'block';
+            } else if (target === 'apps') {
+                if(appsSec) appsSec.style.display = 'block';
+            } else if (target === 'tools') {
+                if(toolsSec) toolsSec.style.display = 'block';
+            } else if (target === 'mods') {
+                if(modsSec) modsSec.style.display = 'block';
+            } else if (target === 'chat') {
+                if(chatSec) chatSec.style.display = 'block';
+            }
+
+            setTimeout(() => {
+                if (target === 'home') {
+                    if(heroGroup) heroGroup.style.opacity = '1';
+                    if(appsSec) appsSec.style.opacity = '1';
+                } else if (target === 'apps') {
+                    if(appsSec) appsSec.style.opacity = '1';
+                } else if (target === 'tools') {
+                    if(toolsSec) toolsSec.style.opacity = '1';
+                } else if (target === 'mods') {
+                    if(modsSec) modsSec.style.opacity = '1';
+                } else if (target === 'chat') {
+                    if(chatSec) chatSec.style.opacity = '1';
+                }
+            }, 50);
+
+            window.scrollTo({top: 0, behavior: 'auto'}); // jump to top instantly
+        });
+    });
+
+});
+    </script>
+</body>
+</html>
